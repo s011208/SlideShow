@@ -14,13 +14,28 @@
         android:scrollbarStyle="insideInset" >
     </ListView>
 
-    <TextView
+    <RelativeLayout
         android:id="@+id/main_preview"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/setting_options_list" >
-    </TextView>
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/setting_options_list"
+        android:background="@color/setting_list_divider"
+        android:padding="2dp" >
+
+        <com.bj4.yhh.slideshow.SlideTextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:ellipsize="marquee"
+            android:freezesText="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true" >
+        </com.bj4.yhh.slideshow.SlideTextView>
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/main_setting_content_fragment"

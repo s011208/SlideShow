@@ -36,10 +36,8 @@ public class MainActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    mSettingListAdapter.setSelectedItem(position);
-                    mSettingListAdapter.notifyDataSetChanged();
-                }
+                mSettingListAdapter.setSelectedItem(position);
+                mSettingListAdapter.notifyDataSetChanged();
             }
         });
     }

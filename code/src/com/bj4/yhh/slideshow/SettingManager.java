@@ -1,8 +1,11 @@
 
 package com.bj4.yhh.slideshow;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 public class SettingManager {
     private Context mContext;
@@ -11,9 +14,33 @@ public class SettingManager {
 
     private SharedPreferences mPref;
 
+    public interface TextSettingChangeCallback {
+        public void onTextSettingChanged();
+    }
+
+    public final ArrayList<TextSettingChangeCallback> mCallbacks = new ArrayList<TextSettingChangeCallback>();
+
     private static final String PREF_NAME = "_slideshow_pref";
 
-    public synchronized SettingManager getInstance(Context context) {
+    private static final String KEY_TEXT = "pref_text";
+
+    private static final String KEY_BACKGROUND = "pref_background";
+
+    private static final String KEY_TEXT_COLOR = "pref_text_color";
+
+    private static final String KEY_TEXT_SIZE = "pref_text_size";
+
+    private static final String KEY_ALIGNMENT = "pref_text_alignment";
+
+    private static final String KEY_TEXT_STYLE = "pref_text_style";
+
+    public static final int ALIGNMENT_TOP = 0;
+
+    public static final int ALIGNMENT_CENTER = 1;
+
+    public static final int ALIGNMENT_BOTTOM = 2;
+
+    public synchronized static SettingManager getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new SettingManager(context);
         }
@@ -23,6 +50,75 @@ public class SettingManager {
     private SettingManager(Context context) {
         mContext = context.getApplicationContext();
         mPref = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    }
+
+    public void registerCallback(TextSettingChangeCallback cb) {
+        if (mCallbacks.contains(cb) == false)
+            mCallbacks.add(cb);
+    }
+
+    public void unRegisterCallback(TextSettingChangeCallback cb) {
+        mCallbacks.remove(cb);
+    }
+
+    public void notifySettingChanged() {
+        for (TextSettingChangeCallback cb : mCallbacks) {
+            cb.onTextSettingChanged();
+        }
+    }
+
+    public int getBackgroundColor() {
+        return mPref.getInt(KEY_BACKGROUND, Color.WHITE);
+    }
+
+    public void setBackgroundColor(int color) {
+        mPref.edit().putInt(KEY_BACKGROUND, color).commit();
+        notifySettingChanged();
+    }
+
+    public int getTextColor() {
+        return mPref.getInt(KEY_TEXT_COLOR, Color.BLACK);
+    }
+
+    public void setTextColor(int color) {
+        mPref.edit().putInt(KEY_TEXT_COLOR, color).commit();
+        notifySettingChanged();
+    }
+
+    public int getTextSize() {
+        return mPref.getInt(KEY_TEXT_SIZE, 25);
+    }
+
+    public void setTextSize(int size) {
+        mPref.edit().putInt(KEY_TEXT_SIZE, size).commit();
+        notifySettingChanged();
+    }
+
+    public int getAlignment() {
+        return mPref.getInt(KEY_ALIGNMENT, ALIGNMENT_CENTER);
+    }
+
+    public void setAlignment(int alignment) {
+        mPref.edit().putInt(KEY_ALIGNMENT, alignment).commit();
+        notifySettingChanged();
+    }
+
+    public int getTextStyle() {
+        return mPref.getInt(KEY_TEXT_STYLE, 0);
+    }
+
+    public void setTextStyle(int style) {
+        mPref.edit().putInt(KEY_TEXT, style).commit();
+        notifySettingChanged();
+    }
+
+    public String getText() {
+        return mPref.getString(KEY_TEXT, "SHOW!");
+    }
+
+    public void setText(String text) {
+        mPref.edit().putString(KEY_TEXT, text).commit();
+        notifySettingChanged();
     }
 
 }
