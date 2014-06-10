@@ -1,4 +1,3 @@
-
 package com.bj4.yhh.slideshow;
 
 import java.util.ArrayList;
@@ -6,119 +5,141 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Handler;
 
 public class SettingManager {
-    private Context mContext;
+	private Context mContext;
 
-    private static SettingManager mInstance;
+	private Handler mHandler = new Handler();
 
-    private SharedPreferences mPref;
+	private static SettingManager mInstance;
 
-    public interface TextSettingChangeCallback {
-        public void onTextSettingChanged();
-    }
+	private SharedPreferences mPref;
 
-    public final ArrayList<TextSettingChangeCallback> mCallbacks = new ArrayList<TextSettingChangeCallback>();
+	public interface TextSettingChangeCallback {
+		public void onTextSettingChanged();
+	}
 
-    private static final String PREF_NAME = "_slideshow_pref";
+	public final ArrayList<TextSettingChangeCallback> mCallbacks = new ArrayList<TextSettingChangeCallback>();
 
-    private static final String KEY_TEXT = "pref_text";
+	private static final String PREF_NAME = "_slideshow_pref";
 
-    private static final String KEY_BACKGROUND = "pref_background";
+	private static final String KEY_TEXT = "pref_text";
 
-    private static final String KEY_TEXT_COLOR = "pref_text_color";
+	private static final String KEY_BACKGROUND = "pref_background";
 
-    private static final String KEY_TEXT_SIZE = "pref_text_size";
+	private static final String KEY_TEXT_COLOR = "pref_text_color";
 
-    private static final String KEY_ALIGNMENT = "pref_text_alignment";
+	private static final String KEY_TEXT_SIZE = "pref_text_size";
 
-    private static final String KEY_TEXT_STYLE = "pref_text_style";
+	private static final String KEY_ALIGNMENT = "pref_text_alignment";
 
-    public static final int ALIGNMENT_TOP = 0;
+	private static final String KEY_TEXT_STYLE = "pref_text_style";
 
-    public static final int ALIGNMENT_CENTER = 1;
+	private static final String KEY_DURATION = "pref_durate";
 
-    public static final int ALIGNMENT_BOTTOM = 2;
+	public static final int ALIGNMENT_TOP = 0;
 
-    public synchronized static SettingManager getInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new SettingManager(context);
-        }
-        return mInstance;
-    }
+	public static final int ALIGNMENT_CENTER = 1;
 
-    private SettingManager(Context context) {
-        mContext = context.getApplicationContext();
-        mPref = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-    }
+	public static final int ALIGNMENT_BOTTOM = 2;
 
-    public void registerCallback(TextSettingChangeCallback cb) {
-        if (mCallbacks.contains(cb) == false)
-            mCallbacks.add(cb);
-    }
+	public synchronized static SettingManager getInstance(Context context) {
+		if (mInstance == null) {
+			mInstance = new SettingManager(context);
+		}
+		return mInstance;
+	}
 
-    public void unRegisterCallback(TextSettingChangeCallback cb) {
-        mCallbacks.remove(cb);
-    }
+	private SettingManager(Context context) {
+		mContext = context.getApplicationContext();
+		mPref = mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+	}
 
-    public void notifySettingChanged() {
-        for (TextSettingChangeCallback cb : mCallbacks) {
-            cb.onTextSettingChanged();
-        }
-    }
+	public void registerCallback(TextSettingChangeCallback cb) {
+		if (mCallbacks.contains(cb) == false)
+			mCallbacks.add(cb);
+	}
 
-    public int getBackgroundColor() {
-        return mPref.getInt(KEY_BACKGROUND, Color.WHITE);
-    }
+	public void unRegisterCallback(TextSettingChangeCallback cb) {
+		mCallbacks.remove(cb);
+	}
 
-    public void setBackgroundColor(int color) {
-        mPref.edit().putInt(KEY_BACKGROUND, color).commit();
-        notifySettingChanged();
-    }
+	public void notifySettingChanged() {
 
-    public int getTextColor() {
-        return mPref.getInt(KEY_TEXT_COLOR, Color.BLACK);
-    }
+		for (final TextSettingChangeCallback cb : mCallbacks) {
+			mHandler.post(new Runnable() {
 
-    public void setTextColor(int color) {
-        mPref.edit().putInt(KEY_TEXT_COLOR, color).commit();
-        notifySettingChanged();
-    }
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					cb.onTextSettingChanged();
+				}
+			});
+		}
+	}
 
-    public int getTextSize() {
-        return mPref.getInt(KEY_TEXT_SIZE, 25);
-    }
+	public int getDuration() {
+		return mPref.getInt(KEY_DURATION, 5000);
+	}
 
-    public void setTextSize(int size) {
-        mPref.edit().putInt(KEY_TEXT_SIZE, size).commit();
-        notifySettingChanged();
-    }
+	public void setDuration(int duration) {
+		mPref.edit().putInt(KEY_DURATION, duration).commit();
+		notifySettingChanged();
+	}
 
-    public int getAlignment() {
-        return mPref.getInt(KEY_ALIGNMENT, ALIGNMENT_CENTER);
-    }
+	public int getBackgroundColor() {
+		return mPref.getInt(KEY_BACKGROUND, Color.WHITE);
+	}
 
-    public void setAlignment(int alignment) {
-        mPref.edit().putInt(KEY_ALIGNMENT, alignment).commit();
-        notifySettingChanged();
-    }
+	public void setBackgroundColor(int color) {
+		mPref.edit().putInt(KEY_BACKGROUND, color).commit();
+		notifySettingChanged();
+	}
 
-    public int getTextStyle() {
-        return mPref.getInt(KEY_TEXT_STYLE, 0);
-    }
+	public int getTextColor() {
+		return mPref.getInt(KEY_TEXT_COLOR, Color.BLACK);
+	}
 
-    public void setTextStyle(int style) {
-        mPref.edit().putInt(KEY_TEXT, style).commit();
-        notifySettingChanged();
-    }
+	public void setTextColor(int color) {
+		mPref.edit().putInt(KEY_TEXT_COLOR, color).commit();
+		notifySettingChanged();
+	}
 
-    public String getText() {
-        return mPref.getString(KEY_TEXT, "SHOW!");
-    }
+	public int getTextSize() {
+		return mPref.getInt(KEY_TEXT_SIZE, 25);
+	}
 
-    public void setText(String text) {
-        mPref.edit().putString(KEY_TEXT, text).commit();
-        notifySettingChanged();
-    }
+	public void setTextSize(int size) {
+		mPref.edit().putInt(KEY_TEXT_SIZE, size).commit();
+		notifySettingChanged();
+	}
+
+	public int getAlignment() {
+		return mPref.getInt(KEY_ALIGNMENT, ALIGNMENT_CENTER);
+	}
+
+	public void setAlignment(int alignment) {
+		mPref.edit().putInt(KEY_ALIGNMENT, alignment).commit();
+		notifySettingChanged();
+	}
+
+	public int getTextStyle() {
+		return mPref.getInt(KEY_TEXT_STYLE, 0);
+	}
+
+	public void setTextStyle(int style) {
+		mPref.edit().putInt(KEY_TEXT, style).commit();
+		notifySettingChanged();
+	}
+
+	public String getText() {
+		return mPref.getString(KEY_TEXT, "SHOW!");
+	}
+
+	public void setText(String text) {
+		mPref.edit().putString(KEY_TEXT, text).commit();
+		notifySettingChanged();
+	}
 
 }

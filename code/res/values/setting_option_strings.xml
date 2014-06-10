@@ -9,6 +9,7 @@
         <item>Text size</item>
         <item>Alignment</item>
         <item>Text style</item>
+        <item>Duration</item>
     </string-array>
 
 </resources>
