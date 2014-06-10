@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="setting_options">
+        <item>Start to show</item>
+        <item>Set text</item>
+        <item>Background color</item>
+        <item>Text color</item>
+        <item>Text size</item>
+        <item>Alignment</item>
+        <item>Text style</item>
+    </string-array>
+
+</resources>
