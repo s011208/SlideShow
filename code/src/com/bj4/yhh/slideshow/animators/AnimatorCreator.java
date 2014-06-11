@@ -17,7 +17,7 @@ public class AnimatorCreator {
 
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
-				int v = (int) animation.getAnimatedValue();
+				int v = (Integer) animation.getAnimatedValue();
 				if (main != null) {
 					main.setTranslationX(v);
 				}

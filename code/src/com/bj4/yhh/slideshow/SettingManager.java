@@ -124,12 +124,12 @@ public class SettingManager {
 		notifySettingChanged();
 	}
 
-	public int getTextStyle() {
-		return mPref.getInt(KEY_TEXT_STYLE, 0);
+	public String getTextStyle() {
+		return mPref.getString(KEY_TEXT_STYLE, "");
 	}
 
-	public void setTextStyle(int style) {
-		mPref.edit().putInt(KEY_TEXT, style).commit();
+	public void setTextStyle(String style) {
+		mPref.edit().putString(KEY_TEXT_STYLE, style).commit();
 		notifySettingChanged();
 	}
 

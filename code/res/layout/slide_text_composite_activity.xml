@@ -1,0 +1,28 @@
+<com.bj4.yhh.slideshow.SlideTextCompositeView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_preview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_toRightOf="@+id/setting_options_list_sep" >
+
+    <com.bj4.yhh.slideshow.SlideText
+        android:id="@+id/main_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+    </com.bj4.yhh.slideshow.SlideText>
+
+    <com.bj4.yhh.slideshow.SlideText
+        android:id="@+id/shadow_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:visibility="gone" >
+    </com.bj4.yhh.slideshow.SlideText>
+
+</com.bj4.yhh.slideshow.SlideTextCompositeView>

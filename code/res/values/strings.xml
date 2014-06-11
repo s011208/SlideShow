@@ -7,6 +7,8 @@
     <string name="green">Green</string>
     <string name="blue">Blue</string>
     <string name="red">Red</string>
+    <string name="textsize">Text size</string>
     <string name="animation_duration">Animation duration</string>
+    <string name="textsize_not_change_on_preview_hint">"*Text size will not change on preview"</string>
 
 </resources>

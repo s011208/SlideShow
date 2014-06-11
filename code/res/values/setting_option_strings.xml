@@ -10,6 +10,7 @@
         <item>Alignment</item>
         <item>Text style</item>
         <item>Duration</item>
+        <item>Animation</item>
     </string-array>
 
 </resources>
