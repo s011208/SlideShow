@@ -9,7 +9,7 @@
     <com.bj4.yhh.slideshow.SlideText
         android:id="@+id/main_text"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/preview_height"
         android:gravity="center"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
@@ -18,7 +18,7 @@
     <com.bj4.yhh.slideshow.SlideText
         android:id="@+id/shadow_text"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/preview_height"
         android:gravity="center"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"

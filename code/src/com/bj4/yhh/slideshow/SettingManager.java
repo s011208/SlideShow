@@ -32,17 +32,9 @@ public class SettingManager {
 
 	private static final String KEY_TEXT_SIZE = "pref_text_size";
 
-	private static final String KEY_ALIGNMENT = "pref_text_alignment";
-
 	private static final String KEY_TEXT_STYLE = "pref_text_style";
 
 	private static final String KEY_DURATION = "pref_durate";
-
-	public static final int ALIGNMENT_TOP = 0;
-
-	public static final int ALIGNMENT_CENTER = 1;
-
-	public static final int ALIGNMENT_BOTTOM = 2;
 
 	public synchronized static SettingManager getInstance(Context context) {
 		if (mInstance == null) {
@@ -112,15 +104,6 @@ public class SettingManager {
 
 	public void setTextSize(int size) {
 		mPref.edit().putInt(KEY_TEXT_SIZE, size).commit();
-		notifySettingChanged();
-	}
-
-	public int getAlignment() {
-		return mPref.getInt(KEY_ALIGNMENT, ALIGNMENT_CENTER);
-	}
-
-	public void setAlignment(int alignment) {
-		mPref.edit().putInt(KEY_ALIGNMENT, alignment).commit();
 		notifySettingChanged();
 	}
 

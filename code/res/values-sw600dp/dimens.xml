@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="preview_height">200dp</dimen>
+
+</resources>
