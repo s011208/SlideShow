@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="animation_options">
+        <item>右到左</item>
+        <item>左到右</item>
+        <item>閃光</item>
+        <item>心跳</item>
+        <item>雙層心跳</item>
+        <item>水平交集</item>
+        <item>垂直交集</item>
+    </string-array>
+
+</resources>

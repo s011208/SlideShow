@@ -2,7 +2,9 @@
 package com.bj4.yhh.slideshow;
 
 import com.bj4.yhh.slideshow.animators.AnimatorCreator;
+import com.yenhsun.slidingshow.R;
 
+import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -15,9 +17,11 @@ public class SlideTextCompositeView extends RelativeLayout implements
 
     private int mViewHeight, mViewWidth;
 
-    private ValueAnimator mAnimator;
+    private AnimatorSet mAnimator;
 
     private SettingManager mSettingManager;
+
+    private Context mContext;
 
     public SlideTextCompositeView(Context context) {
         this(context, null);
@@ -29,6 +33,7 @@ public class SlideTextCompositeView extends RelativeLayout implements
 
     public SlideTextCompositeView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
         mSettingManager = SettingManager.getInstance(context);
         onTextSettingChanged();
     }
@@ -54,9 +59,10 @@ public class SlideTextCompositeView extends RelativeLayout implements
     private void initAnimator() {
         if (mViewHeight == 0 || mViewWidth == 0)
             return;
-        mAnimator = AnimatorCreator.createSimpleHScrollAnimator(mMainText, mShadowText, mViewWidth,
-                mViewHeight, mSettingManager.getDuration());
-        mAnimator.start();
+        mAnimator = AnimatorCreator.createAnimator(this, mMainText, mShadowText, mViewWidth,
+                mViewHeight, mSettingManager.getDuration(), mContext);
+        if (mAnimator != null)
+            mAnimator.start();
     }
 
     public void onFinishInflate() {

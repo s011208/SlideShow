@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="setting_options">
+        <item>開始 show 吧！</item>
+        <item>文字內容</item>
+        <item>背景顏色</item>
+        <item>文字顏色</item>
+        <item>文字大小</item>
+        <item>文字樣式</item>
+        <item>動畫時間</item>
+        <item>動畫效果</item>
+    </string-array>
+
+</resources>

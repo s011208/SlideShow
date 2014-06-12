@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">文字 show 大字報</string>
+    <string name="green">綠</string>
+    <string name="blue">藍</string>
+    <string name="red">紅</string>
+    <string name="textsize">文字大小</string>
+    <string name="animation_duration">動畫時間</string>
+    <string name="textsize_not_change_on_preview_hint">"*文字大小的改變不會被套用到預覽中"</string>
+
+</resources>

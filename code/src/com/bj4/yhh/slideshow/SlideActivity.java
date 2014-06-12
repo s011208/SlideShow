@@ -3,6 +3,7 @@ package com.bj4.yhh.slideshow;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.yenhsun.slidingshow.R;
 
 import android.app.Activity;
 import android.os.Bundle;

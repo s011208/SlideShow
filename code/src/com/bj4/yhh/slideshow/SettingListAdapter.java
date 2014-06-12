@@ -3,6 +3,8 @@ package com.bj4.yhh.slideshow;
 
 import java.util.ArrayList;
 
+import com.yenhsun.slidingshow.R;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;

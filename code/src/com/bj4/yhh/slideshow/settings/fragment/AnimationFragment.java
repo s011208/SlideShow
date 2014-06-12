@@ -2,6 +2,7 @@
 package com.bj4.yhh.slideshow.settings.fragment;
 
 import com.bj4.yhh.slideshow.SettingManager;
+import com.bj4.yhh.slideshow.SlideTextCompositeView;
 import com.bj4.yhh.slideshow.SlidingFonts;
 import com.yenhsun.slidingshow.R;
 
@@ -26,7 +27,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-public class TypefaceFragment extends Fragment {
+public class AnimationFragment extends Fragment {
 
     private View mMainContainer;
 
@@ -34,57 +35,54 @@ public class TypefaceFragment extends Fragment {
 
     private GridView mGrid;
 
-    private TypefaceGridAdapter mGridAdapter;
+    private AnimationGridAdapter mGridAdapter;
 
     private LayoutInflater mInflater;
 
     private Context mContext;
-
-    private String mCurrentTypeface;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mInflater = inflater;
         mContext = getActivity();
-        mMainContainer = mInflater.inflate(R.layout.text_typeface_fragment, container, false);
+        mMainContainer = mInflater.inflate(R.layout.animation_fragment, container, false);
         mSetting = SettingManager.getInstance(getActivity());
-        mCurrentTypeface = mSetting.getTextStyle();
-        mGrid = (GridView)mMainContainer.findViewById(R.id.type_face_grid);
-        mGridAdapter = new TypefaceGridAdapter();
+        mGrid = (GridView)mMainContainer.findViewById(R.id.animation_grid);
+        mGridAdapter = new AnimationGridAdapter();
         mGrid.setAdapter(mGridAdapter);
-        if ("".equals(mCurrentTypeface) == false) {
-            int position = SlidingFonts.FONTS.indexOf(mCurrentTypeface);
-            if (position != -1) {
-                mGridAdapter.setSelected(position);
-            }
-        }
+        mGridAdapter.setSelected(mSetting.getAnimation());
         mGrid.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mCurrentTypeface = mGridAdapter.getItem(position);
-                mSetting.setTextStyle(mCurrentTypeface);
+                mSetting.setAnimation(position);
                 mGridAdapter.setSelected(position);
             }
         });
         return mMainContainer;
     }
 
-    private class TypefaceGridAdapter extends BaseAdapter {
+    private class AnimationGridAdapter extends BaseAdapter {
 
         private int mSelectPosition = -1;
+
+        private final String[] mData;
+
+        public AnimationGridAdapter() {
+            mData = mContext.getResources().getStringArray(R.array.animation_options);
+        }
 
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return SlidingFonts.FONTS.size();
+            return mData.length;
         }
 
         @Override
         public String getItem(int position) {
             // TODO Auto-generated method stub
-            return SlidingFonts.FONTS.get(position);
+            return mData[position];
         }
 
         @Override
@@ -102,15 +100,14 @@ public class TypefaceFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.typeface_grid_row, null);
+                convertView = mInflater.inflate(R.layout.animation_grid_row, null);
                 holder = new ViewHolder();
-                holder.mTxt = (TextView)convertView.findViewById(R.id.type_face_grid_row);
+                holder.mTxt = (TextView)convertView.findViewById(R.id.animation_grid_row);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder)convertView.getTag();
             }
-            holder.mTxt.setTypeface(Typeface.createFromAsset(mContext.getAssets(),
-                    getItem(position)));
+            holder.mTxt.setText(getItem(position));
             if (mSelectPosition == position) {
                 ((FrameLayout)convertView).setForeground(mContext.getResources().getDrawable(
                         R.drawable.type_face_grid_row_fg));

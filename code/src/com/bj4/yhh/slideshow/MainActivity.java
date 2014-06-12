@@ -6,6 +6,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.yenhsun.slidingshow.R;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,6 +43,7 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SlidingFonts.initIfNeeded(this);
@@ -136,7 +139,7 @@ public class MainActivity extends Activity {
                         transaction.commit();
                         break;
                     case 7:
-                        transaction.replace(R.id.main_fragment_container, new DurationFragment());
+                        transaction.replace(R.id.main_fragment_container, new AnimationFragment());
                         transaction.commit();
                         break;
                 }

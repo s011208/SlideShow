@@ -1,7 +1,7 @@
 package com.bj4.yhh.slideshow.settings.fragment;
 
-import com.bj4.yhh.slideshow.R;
 import com.bj4.yhh.slideshow.SettingManager;
+import com.yenhsun.slidingshow.R;
 
 import android.app.Fragment;
 import android.graphics.Color;

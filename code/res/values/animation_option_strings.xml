@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="animation_options">
+        <item>Right to left</item>
+        <item>Left to right</item>
+        <item>Flash</item>
+        <item>Heart beat</item>
+        <item>Hear beat with shadow</item>
+        <item>H interSect</item>
+        <item>V interSect</item>
+    </string-array>
+
+</resources>

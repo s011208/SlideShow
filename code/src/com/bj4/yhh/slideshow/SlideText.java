@@ -1,6 +1,8 @@
 
 package com.bj4.yhh.slideshow;
 
+import com.yenhsun.slidingshow.R;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
@@ -47,7 +49,9 @@ public class SlideText extends TextView implements SettingManager.TextSettingCha
         else {
             setTextSize(mContext.getResources().getDimension(R.dimen.preview_text_size));
         }
-        setTypeface(Typeface.createFromAsset(mContext.getAssets(), mSettingManager.getTextStyle()));
+        String textStyle = mSettingManager.getTextStyle();
+        if ("".equals(textStyle) == false)
+            setTypeface(Typeface.createFromAsset(mContext.getAssets(), textStyle));
     }
 
     @Override
